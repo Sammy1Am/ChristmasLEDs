@@ -19,6 +19,7 @@ namespace lights
       unsigned int tickCount = 0;
       unsigned int lubTicks = TICK_MICROS/2500;
       unsigned int dubTicks = lubTicks * 1.15;
+      void setBPM(uint8_t newBPM, bool setConfig);
   };
 } // namespace lights
 

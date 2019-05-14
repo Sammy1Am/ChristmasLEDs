@@ -2,6 +2,7 @@
 namespace lights {
   void Heartbeat::startup() {
     FastLED.clear(true); // Clear all lights
+    Heartbeat::setBPM(config::getConfig(config::SmallSetting::HB_BPM) > 0 ? config::getConfig(config::SmallSetting::HB_BPM) : 60, false);
     for (int i=0;i<LED_NUM_LEDS;i++){
           hsvshift::hsv_leds[i] = CHSV(HSVHue::HUE_RED,255,0); // Red, fully saturated, zero value
           hsvshift::hueshift[i] = 0;
@@ -56,10 +57,23 @@ namespace lights {
     switch (payload[0]){
       case config::SmallSetting::HB_BPM:
         if (payload[1] > 0){ // Don't set heartrate to zero!
-          Heartbeat::lubTicks = (60000000 / TICK_MICROS) / (int)payload[1]; // BPM to tick-period
-          Heartbeat::dubTicks = lubTicks * 1.15;
+          Heartbeat::setBPM(payload[1], true);
         }
+        
         break;
     }
+  }
+
+  void Heartbeat::setBPM(uint8_t newBPM, bool setConfig) {
+    #ifdef DEBUG_MSG
+            Serial.printf("Setting BPM to %d\n", newBPM);
+        #endif
+        
+        Heartbeat::lubTicks = (60000000 / TICK_MICROS) / (int)newBPM; // BPM to tick-period
+        Heartbeat::dubTicks = lubTicks * 1.15;
+
+        if (setConfig) {
+            config::setConfig(config::SmallSetting::HB_BPM, newBPM);
+        }
   }
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Christmas Lights Control</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="lightsControl.js" type="text/javascript"></script>
+    </head>
+    <body onload="loadConfig();">
+        <div class="panel panel-default">
+            <div class="form-group">
+                <label for="modeSelect">Mode:</label>
+                <select class="form-control" id="modeSelect">
+                    <option value="0">Off</option>
+                    <option value="1">Blink Test</option>
+                    <option value="2">Random Fade</option>
+                    <option value="3">Xmas Tree</option>
+                    <option value="4">American Flag</option>
+                    <option value="5">Heartbeat</option>
+                </select>
+                <input type="button" class="btn" value="SetMode" onclick="sendMessage(FIRST_BYTES.mode,document.getElementById('modeSelect').options[document.getElementById('modeSelect').selectedIndex].value);viewMode(document.getElementById('modeSelect').options[document.getElementById('modeSelect').selectedIndex].value)">
+            </div>
+            <div class="form-group">
+                <label for="brightnessValue">Brightness:</label>
+                <input type="number" min="0" max="255" value="50" id="brightnessValue" onchange="sendMessage(FIRST_BYTES.brightness,this.value);">
+            </div>
+        </div>
+        <div id="mode_0" style="display:none">
+            Off.
+        </div>
+        <div id="mode_1" style="display:none">
+            Blink Test.
+        </div>
+        <div id="mode_2" style="display:none">
+            <h3>Random Fade</h3>
+            Twinkle:
+            <input type="checkbox" id="rf_TwinkleCB" onchange="sendMessage(FIRST_BYTES.rf_twinkle,this.checked);">
+            <br />
+            Color Band Size:
+            <input type="number" min="1" max="255" value="6" id="rf_bandSize" onchange="sendMessage(FIRST_BYTES.rf_bandsize,this.value);">
+        </div>
+        <div id="mode_3" class="panel panel-default" style="display:none">
+            <div class="panel-heading"><h3>Xmas Tree</h3></div>
+            <div class="panel-body">
+            Twinkle:
+            <input type="checkbox" id="xt_TwinkleCB" onchange="sendMessage(FIRST_BYTES.xt_twinkle,this.checked);">
+            <br />
+            Star Size:
+            <input type="number" min="0" max="255" value="6" id="xt_starSize" onchange="sendMessage(FIRST_BYTES.xt_starsize,this.value);">
+            Ornament Spacing (0 to disable):
+            <input type="number" min="0" max="255" value="0" id="xt_ornamentSpacing" onchange="sendMessage(FIRST_BYTES.xt_ornamentspacing,this.value);">
+            </div>
+        </div>
+        <div id="mode_4" style="display:none">
+            <h3>American Flag</h3>
+        </div>
+        <div id="mode_5" style="display:none">
+            <h3>Heartbeat</h3>
+            <br />
+            BPM:
+            <input type="number" min="20" max="255" value="60" id="hb_bpm" onchange="sendMessage(FIRST_BYTES.hb_bpm,this.value);">
+        </div>
+    </body>
+</html>

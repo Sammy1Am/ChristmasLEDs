@@ -19,6 +19,7 @@
                     <option value="3">Xmas Tree</option>
                     <option value="4">American Flag</option>
                     <option value="5">Heartbeat</option>
+                    <option value="6">Apartment Display</option>
                 </select>
                 <input type="button" class="btn" value="SetMode" onclick="sendMessage(FIRST_BYTES.mode,document.getElementById('modeSelect').options[document.getElementById('modeSelect').selectedIndex].value);viewMode(document.getElementById('modeSelect').options[document.getElementById('modeSelect').selectedIndex].value)">
             </div>
@@ -45,13 +46,16 @@
             <div class="panel-heading"><h3>Xmas Tree</h3></div>
             <div class="panel-body">
             Twinkle:
-            <input type="checkbox" id="xt_TwinkleCB" onchange="sendMessage(FIRST_BYTES.xt_twinkle,this.checked);">
+            <input type="checkbox" id="xt_TwinkleCB" name="xt_TwinkleCB" onchange="sendMessage(FIRST_BYTES.xt_twinkle,this.checked);">
             <br />
             Star Size:
-            <input type="number" min="0" max="255" value="6" id="xt_starSize" onchange="sendMessage(FIRST_BYTES.xt_starsize,this.value);">
+            <input type="number" min="0" max="255" value="6" id="xt_starSize" name="xt_starSize" onchange="sendMessage(FIRST_BYTES.xt_starsize,this.value);">
             Ornament Spacing (0 to disable):
-            <input type="number" min="0" max="255" value="0" id="xt_ornamentSpacing" onchange="sendMessage(FIRST_BYTES.xt_ornamentspacing,this.value);">
-            </div>
+            <input type="number" min="0" max="255" value="0" id="xt_ornamentSpacing" name="xt_ornamentSpacing"onchange="sendMessage(FIRST_BYTES.xt_ornamentspacing,this.value);">
+            <br />
+            Trigger Light Show:
+            <input type="button" value="Go" id="xt_triggerShow" onclick="sendMessage(FIRST_BYTES.xt_triggerShow,0);">
+        </div>
         </div>
         <div id="mode_4" style="display:none">
             <h3>American Flag</h3>
@@ -61,6 +65,26 @@
             <br />
             BPM:
             <input type="number" min="20" max="255" value="60" id="hb_bpm" onchange="sendMessage(FIRST_BYTES.hb_bpm,this.value);">
+        </div>
+        <div id="mode_6" class="panel panel-default" style="display:none">
+            <div class="panel-heading">
+                <h3>Apartment Display</h3>
+            </div>
+            <div class="panel-body">
+                Twinkle:
+                <input type="checkbox" id="xt_TwinkleCB" name="xt_TwinkleCB" onchange="sendMessage(FIRST_BYTES.xt_twinkle,this.checked);">
+                <br />
+                Star Size:
+                <input type="number" min="0" max="255" value="6" id="xt_starSize" name="xt_starSize"
+                    onchange="sendMessage(FIRST_BYTES.xt_starsize,this.value);">
+                Ornament Spacing (0 to disable):
+                <input type="number" min="0" max="255" value="0" id="xt_ornamentSpacing" name="xt_ornamentSpacing"
+                    onchange="sendMessage(FIRST_BYTES.xt_ornamentspacing,this.value);">
+                <br />
+                Trigger Light Show:
+                <input type="button" value="Go" id="xt_triggerShow"
+                    onclick="sendMessage(FIRST_BYTES.xt_triggerShow,0);">
+            </div>
         </div>
     </body>
 </html>

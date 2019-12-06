@@ -24,7 +24,8 @@ var FIRST_BYTES = {"mode":128,
   "xt_twinkle":132,
   "xt_starsize":133,
   "xt_ornamentspacing":134,
-  "hb_bpm":135,};
+  "hb_bpm": 135,
+  "xt_triggerShow":12};
 
 function fetchConfigVariables() {
   // Remove existing config
@@ -48,9 +49,15 @@ function updateUIFromConfig() {
   document.getElementById('rf_TwinkleCB').checked = xmasconfig.rf_twinkle > 0;
   document.getElementById('rf_bandSize').value = xmasconfig.rf_bandsize;
 
-  document.getElementById('xt_TwinkleCB').checked = xmasconfig.xt_twinkle > 0;
-  document.getElementById('xt_starSize').value = xmasconfig.xt_starsize;
-  document.getElementById('xt_ornamentSpacing').value = xmasconfig.xt_ornamentspacing;
+  document.getElementsByName('xt_TwinkleCB').forEach(function (ele, idx) {
+    ele.checked = xmasconfig.xt_twinkle > 0;
+  });
+  document.getElementsByName('xt_starSize').forEach(function (ele, idx) {
+    ele.value = xmasconfig.xt_starsize;
+  });
+  document.getElementsByName('xt_ornamentSpacing').forEach(function (ele, idx) {
+    ele.value = xmasconfig.xt_ornamentspacing;
+  });
   document.getElementById('hb_bpm').value = xmasconfig.hb_bpm;
 
   viewMode(xmasconfig.mode);

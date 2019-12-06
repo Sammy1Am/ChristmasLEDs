@@ -4,13 +4,13 @@ namespace lights {
 
     CRGB leds[LED_NUM_LEDS]; // Actual FastLED array
 
-    Mode *modes[NUM_MODES] = {new Off(), new BlinkTest(), new RandomFade(), new XmasTree(), new AmericanFlag(), new Heartbeat()}; // Array of mode options
+    Mode *modes[NUM_MODES] = {new Off(), new BlinkTest(), new RandomFade(), new XmasTree(), new AmericanFlag(), new Heartbeat(), new ApartmentDisplay()}; // Array of mode options
     Mode *currentMode = modes[0]; // Start current mode as "Off"
 
     void controlSetup() {
         config::setup();
 
-        FastLED.addLeds<WS2811, LED_DATA_PIN, RGB>(leds, LED_NUM_LEDS);
+        FastLED.addLeds<WS2811, LED_DATA_PIN, RGB>(leds, LED_NUM_LEDS).setCorrection(TypicalPixelString);
 
         changeBrightness(config::getConfig(config::SmallSetting::GLOBAL_BRIGHTNESS), false);
         changeMode(config::getConfig(config::SmallSetting::MODE), false);

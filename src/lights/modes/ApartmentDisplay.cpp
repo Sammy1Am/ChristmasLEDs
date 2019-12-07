@@ -146,6 +146,10 @@ namespace lights {
         // We're done!
         aptStarRunPhase = 0;
         currentStatus = TreeStatus::IDLE;
+        //TODO: A bit of a hack to fix twinkles turning a white tree yellow:
+        for (int tl = windowLightCount; tl < LED_NUM_LEDS - ApartmentDisplay::starSize;tl++){
+            ApartmentDisplay::prefillPixel(tl);
+        }
     }
   }
 
@@ -214,6 +218,7 @@ namespace lights {
       } else {
         // TREE
         //hsvshift::hsv_leds[pixelIndex] = CHSV(HSVHue::HUE_GREEN,255,255);
+        hsvshift::satshift[pixelIndex] = 0; // Turn off any shifting that's happening from previous twinkles
         hsvshift::hsv_leds[pixelIndex] = CHSV(45, 45, 255);
       }
   }

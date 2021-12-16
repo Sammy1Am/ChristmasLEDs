@@ -36,11 +36,16 @@ namespace lights {
         if (XmasTree::isTwinkleOn && random16(60) == 0) {
           XmasTree::twinkle(l);
         }
-      } 
+      }
       else if (XmasTree::ornamentSpacing > 1 && l % XmasTree::ornamentSpacing == 0)
       {
         // ORNAMENTS
         // For now, ornaments stay the same color
+        
+        // If twinkleOn, randomly twinkle
+        if (XmasTree::isTwinkleOn && random16(320) == 0) {
+            XmasTree::twinkle(l);
+        }
       } else {
         // TREE
         // Shift value and decrease shift amount
@@ -50,12 +55,12 @@ namespace lights {
         } else if (hsvshift::valshift[l] < 0){
           hsvshift::hsv_leds[l].val = max(0,hsvshift::hsv_leds[l].val+hsvshift::valshift[l]);
           hsvshift::valshift[l]++;
-        } else {
-          if (hsvshift::hsv_leds[l].val < 255){
-            hsvshift::valshift[l] = random8(1, 8);
-          } else {
-            hsvshift::valshift[l] = 0 - random8(1, 14);
-          }
+        } else if (random16(8) == 0) {
+            if (hsvshift::hsv_leds[l].val < 255) {
+                hsvshift::valshift[l] = random8(1, 6);
+            } else {
+                hsvshift::valshift[l] = 0 - random8(1, 12);
+            }
         }
       }
     }
@@ -129,7 +134,7 @@ namespace lights {
         for (int l=0;l<5;l++){
           XmasTree::twinkle(random16(starPosition,LED_NUM_LEDS));
         }
-        starPosition-=3;
+        starPosition = starPosition > 2 ? starPosition - 3 : 0;
         break;
       case 6:
         // We're done!

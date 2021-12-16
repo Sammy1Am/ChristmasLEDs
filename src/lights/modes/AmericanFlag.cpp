@@ -4,11 +4,11 @@ namespace lights {
 
   void AmericanFlag::doStripes() {
   for (int pixel = 0; pixel < NUM_LEDS_GARAGE; pixel++){
-    hsvshift::hsv_leds[pixel].saturation = min(255.0f,max(0.0f,(sin(((float)pixel+AmericanFlag::flagWaveValue)/2.0f) + 0.8f)*255.0f));
+    hsvshift::hsv_leds[pixel].saturation = min(255.0,max(0.0,(sin(((float)pixel+AmericanFlag::flagWaveValue)/2.0f) + 0.8f)*255.0f));
     leds[pixel] = hsvshift::hsv_leds[pixel];
   }
   for (int pixel = NUM_LEDS_GARAGE + NUM_LEDS_BEDROOMS; pixel < LED_NUM_LEDS; pixel++){
-    hsvshift::hsv_leds[pixel].saturation = min(255.0f,max(0.0f,(sin(((float)pixel+AmericanFlag::flagWaveValue)/2.0f) + 0.8f)*255.0f));
+    hsvshift::hsv_leds[pixel].saturation = min(255.0,max(0.0,(sin(((float)pixel+AmericanFlag::flagWaveValue)/2.0f) + 0.8f)*255.0f));
     leds[pixel] = hsvshift::hsv_leds[pixel];
   }
 }
